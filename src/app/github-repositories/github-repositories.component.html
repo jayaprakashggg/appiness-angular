@@ -1,0 +1,21 @@
+<div class="container m-t-65-px">
+  <h3>Repositories</h3>
+  <div class="row display-flex">
+    <div class="col-12">
+      <ul *ngIf="repositories">
+        <li class="card card-item" *ngFor="let repository of repositories">
+          <strong class="m-5-px" style="color: teal;">{{
+            repository.name
+          }}</strong>
+          <div class="m-5-px">
+            <span style="color: gray;">Language:</span>
+            <strong>{{ repository.language }}</strong>
+          </div>
+        </li>
+      </ul>
+      <div *ngIf="isEmpty">
+        Repository is empty!
+      </div>
+    </div>
+  </div>
+</div>

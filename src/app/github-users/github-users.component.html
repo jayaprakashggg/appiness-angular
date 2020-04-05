@@ -1,0 +1,78 @@
+<div class="container m-t-65-px">
+  <div class="row display-flex">
+    <div class="col-sm-12 col-md-6">
+      <ul *ngIf="users">
+        <li class="card" *ngFor="let user of users">
+          <img [src]="user.avatar_url" />
+          <div>
+            <h5 class="m-5-px">{{ user.login }}</h5>
+            <button class="button" [routerLink]="['/repositories', user.login]">
+              <span>Repository</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+      <div class="btn-prev-next">
+        <button
+          class="btn btn-success"
+          style="float: left;"
+          (click)="onClickPrevious()"
+          *ngIf="this.previousList.length > 0"
+        >
+          <span>{{ "<" }} Previous</span>
+        </button>
+        <button
+          class="btn btn-success"
+          style="float: right;"
+          (click)="onClickNext()"
+        >
+          <span>Next ></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="panel panel-default m-t-20-px">
+        <h4>Search Github User details</h4>
+        <div class="form-group">
+          <label>
+            <strong>Username:</strong>
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="username" />
+          <div style="color: red;" *ngIf="errorMessage">
+            Please enter the valid username!
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="onClickSearch()">
+          <span>Search Details</span>
+        </button>
+      </div>
+      <div
+        class="card user-details m-t-20-px"
+        *ngIf="!errorMessage && searchUser"
+      >
+        <img [src]="searchUser.avatar_url" />
+        <div class="m-5-px">
+          <div class="m-5-px">
+            <strong>{{ searchUser.name }}</strong>
+            <div style="color: darkgoldenrod;">#{{ searchUser.login }}</div>
+          </div>
+          <div *ngIf="searchUser.company" class="m-5-px">
+            Company: <strong>{{ searchUser.company }}</strong>
+          </div>
+          <div *ngIf="searchUser.blog" class="m-5-px">
+            Blog: <strong>{{ searchUser.blog }}</strong>
+          </div>
+          <div *ngIf="searchUser.location" class="m-5-px">
+            Location: <strong>{{ searchUser.location }}</strong>
+          </div>
+          <button
+            class="button"
+            [routerLink]="['/repositories', searchUser.login]"
+          >
+            <span>Repository</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
